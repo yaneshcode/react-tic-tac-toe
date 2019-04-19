@@ -97,6 +97,7 @@ class Game extends React.Component {
     this.state={
       history: [{ squares: Array(9).fill(null) }],
       xIsNext: true,
+      stepCounter: 0,
     };
   }
 
@@ -111,6 +112,13 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([{ squares }]),
       xIsNext: !this.state.xIsNext,
+    })
+  }
+
+  jumpTo(step) {
+    this.setState({
+      stepCounter: step,
+      //xIsNext: (step % 2) === 0,
     })
   }
 
