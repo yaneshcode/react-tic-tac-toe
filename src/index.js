@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { deflateRaw } from 'zlib';
 
 function Square(props) {
   return (
@@ -29,6 +30,9 @@ function calculateWinner(squares) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
+  }
+  if(squares.indexOf(null) == -1) {
+    return "draw";
   }
   return null;
 }
@@ -114,7 +118,9 @@ class Game extends React.Component {
     })
 
     let status;
-    if (winner) {
+    if (winner == "draw") {
+      status = "Game is a Draw!"
+    } else if (winner) {
       status = "Winner: " + winner;
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
